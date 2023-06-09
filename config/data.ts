@@ -1,4 +1,4 @@
-export const data = {
+export const dataTemp = {
   frontend: {
     react: {
       ui: ["vanilla tailwind", "bootstrap", "material ui", "Radix UI"],
@@ -213,5 +213,407 @@ export const data = {
         "google cloud",
       ],
     },
+  },
+};
+
+export const data = {
+  name: "frontend",
+  children: [
+    {
+      name: "react",
+      children: [
+        {
+          name: "ui",
+          children: [
+            { name: "vanilla tailwind" },
+            { name: "bootstrap" },
+            { name: "material ui" },
+            { name: "Radix UI" },
+          ],
+        },
+        {
+          name: "state",
+          children: [
+            { name: "redux" },
+            { name: "context api" },
+            { name: "mobx" },
+            { name: "zustand" },
+          ],
+        },
+        {
+          name: "testing",
+          children: [
+            { name: "jest" },
+            { name: "react testing library" },
+            { name: "cypress" },
+          ],
+        },
+        {
+          name: "routing",
+          children: [
+            { name: "react router" },
+            { name: "reach router" },
+            { name: "next.js" },
+          ],
+        },
+        {
+          name: "styling",
+          children: [
+            { name: "css" },
+            { name: "sass" },
+            { name: "styled components" },
+            { name: "emotion" },
+            { name: "styled jsx" },
+          ],
+        },
+        {
+          name: "fetching",
+          children: [{ name: "axios" }, { name: "fetch" }, { name: "graphql" }],
+        },
+        {
+          name: "animation",
+          children: [
+            { name: "framer motion" },
+            { name: "react spring" },
+            { name: "react transition group" },
+          ],
+        },
+        {
+          name: "forms",
+          children: [
+            { name: "formik" },
+            { name: "react hook form" },
+            { name: "final form" },
+            { name: "react form" },
+          ],
+        },
+        {
+          name: "charts",
+          children: [
+            { name: "recharts" },
+            { name: "chart.js" },
+            { name: "react-vis" },
+            { name: "react-chartjs-2" },
+          ],
+        },
+        {
+          name: "maps",
+          children: [
+            { name: "react-map-gl" },
+            { name: "google-map-react" },
+            { name: "react-leaflet" },
+          ],
+        },
+        {
+          name: "tables",
+          children: [
+            { name: "react-table" },
+            { name: "react-data-table" },
+            { name: "ag-grid" },
+            { name: "mui-datatables" },
+          ],
+        },
+        {
+          name: "hosting",
+          children: [
+            { name: "netlify" },
+            { name: "vercel" },
+            { name: "github pages" },
+            { name: "firebase" },
+            { name: "heroku" },
+            { name: "aws" },
+            { name: "digital ocean" },
+            { name: "linode" },
+            { name: "vultr" },
+            { name: "azure" },
+            { name: "google cloud" },
+          ],
+        },
+      ],
+    },
+    {
+      name: "vue",
+      children: [
+        {
+          name: "ui",
+          children: [
+            { name: "vanilla tailwind" },
+            { name: "bootstrap" },
+            { name: "material ui" },
+            { name: "Radix UI" },
+          ],
+        },
+        {
+          name: "state",
+          children: [
+            { name: "vuex" },
+            { name: "pinia" },
+            { name: "vuestorefront" },
+          ],
+        },
+        {
+          name: "testing",
+          children: [
+            { name: "jest" },
+            { name: "vue testing library" },
+            { name: "cypress" },
+          ],
+        },
+        {
+          name: "routing",
+          children: [{ name: "vue router" }, { name: " nuxt.js" }],
+        },
+        {
+          name: "styling",
+          children: [
+            { name: "css" },
+            { name: "sass" },
+            { name: "styled components" },
+            { name: "emotion" },
+            { name: "styled jsx" },
+          ],
+        },
+        {
+          name: "fetching",
+          children: [{ name: "axios" }, { name: "fetch" }, { name: "graphql" }],
+        },
+        {
+          name: "animation",
+          children: [
+            { name: "framer motion" },
+            { name: "vue transition group" },
+          ],
+        },
+        {
+          name: "forms",
+          children: [
+            { name: "formik" },
+            { name: "react hook form" },
+            { name: "final form" },
+            { name: "react form" },
+          ],
+        },
+        {
+          name: "charts",
+          children: [
+            { name: "recharts" },
+            { name: "chart.js" },
+            { name: "react-vis" },
+            { name: "react-chartjs-2" },
+          ],
+        },
+      ],
+    },
+    {
+      name: "angular",
+      children: [
+        {
+          name: "ui",
+          children: [
+            { name: "vanilla tailwind" },
+            { name: "bootstrap" },
+            { name: "material ui" },
+            { name: "Radix UI" },
+          ],
+        },
+        {
+          name: "state",
+          children: [{ name: "ngrx" }, { name: "akita" }, { name: "ngxs" }],
+        },
+        {
+          name: "testing",
+          children: [
+            { name: "jest" },
+            { name: "angular testing library" },
+            { name: "cypress" },
+          ],
+        },
+        {
+          name: "routing",
+          children: [{ name: "angular router" }, { name: "next.js" }],
+        },
+        {
+          name: "styling",
+          children: [
+            { name: "css" },
+            { name: "sass" },
+            { name: "styled components" },
+            { name: "emotion" },
+            { name: "styled jsx" },
+          ],
+        },
+      ],
+    },
+    {
+      name: "svelte",
+      children: [
+        {
+          name: "ui",
+          children: [
+            { name: "vanilla tailwind" },
+            { name: "bootstrap" },
+            { name: "material ui" },
+            { name: "Radix UI" },
+          ],
+        },
+        {
+          name: "state",
+          children: [{ name: "svelte store" }, { name: "svelte zustand" }],
+        },
+        {
+          name: "testing",
+          children: [
+            { name: "jest" },
+            { name: "svelte testing library" },
+            { name: "cypress" },
+          ],
+        },
+        {
+          name: "routing",
+          children: [{ name: "svelte router" }, { name: "sapper" }],
+        },
+      ],
+    },
+  ],
+  backend: {
+    name: "backend",
+    children: [
+      {
+        name: "nodejs",
+        children: [
+          {
+            name: "framework",
+            children: [
+              { name: "express" },
+              { name: "fastify" },
+              { name: "nest.js" },
+              { name: "hapi" },
+              { name: "koa" },
+              { name: "sails.js" },
+              { name: "loopback" },
+              { name: "adonis.js" },
+              { name: "meteor.js" },
+              { name: "restify" },
+              { name: "total.js" },
+              { name: "feathers.js" },
+              { name: "actionhero.js" },
+              { name: "moleculer" },
+              { name: "seneca" },
+              { name: "micro" },
+            ],
+          },
+          {
+            name: "database",
+            children: [
+              { name: "mongodb" },
+              { name: "mysql" },
+              { name: "postgresql" },
+              { name: "redis" },
+              { name: "elasticsearch" },
+              { name: "cassandra" },
+              { name: "neo4j" },
+              { name: "couchdb" },
+              { name: "rethinkdb" },
+              { name: "firebase" },
+              { name: "dynamodb" },
+              { name: "sqlite" },
+              { name: "oracle" },
+              { name: "mssql" },
+              { name: "maria" },
+            ],
+          },
+        ],
+      },
+      {
+        name: "python",
+        children: [
+          {
+            name: "framework",
+            children: [
+              { name: "django" },
+              { name: "flask" },
+              { name: "fastapi" },
+              { name: "pyramid" },
+              { name: "tornado" },
+              { name: "web2py" },
+              { name: "falcon" },
+              { name: "bottle" },
+              { name: "cherrypy" },
+              { name: "web.py" },
+              { name: "eve" },
+              { name: "sanic" },
+              { name: "nameko" },
+              { name: "quart" },
+              { name: "turboGears" },
+            ],
+          },
+          {
+            name: "database",
+            children: [
+              { name: "postgresql" },
+              { name: "mysql" },
+              { name: "sqlite" },
+              { name: "oracle" },
+              { name: "mongodb" },
+              { name: "couchdb" },
+              { name: "redis" },
+              { name: "firebase" },
+              { name: "dynamodb" },
+              { name: "maria" },
+              { name: "mssql" },
+              { name: "cassandra" },
+              { name: "neo4j" },
+              { name: "arangodb" },
+              { name: "riak" },
+            ],
+          },
+        ],
+      },
+      {
+        name: "java",
+        children: [
+          {
+            name: "framework",
+            children: [
+              { name: "spring boot" },
+              { name: "spring mvc" },
+              { name: "spring webflux" },
+              { name: "grails" },
+              { name: "play framework" },
+              { name: "struts" },
+              { name: "vaadin" },
+              { name: "jHipster" },
+              { name: "vert.x" },
+              { name: "micronaut" },
+              { name: "quarkus" },
+              { name: "wicket" },
+              { name: "jsf" },
+              { name: "tapestry" },
+              { name: "ratpack" },
+            ],
+          },
+          {
+            name: "database",
+            children: [
+              { name: "postgresql" },
+              { name: "mysql" },
+              { name: "oracle" },
+              { name: "mongodb" },
+              { name: "cassandra" },
+              { name: "redis" },
+              { name: "h2" },
+              { name: "hazelcast" },
+              { name: "cockroachdb" },
+              { name: "derby" },
+              { name: "db2" },
+              { name: "informix" },
+              { name: "neo4j" },
+              { name: "teradata" },
+              { name: "voltdb" },
+            ],
+          },
+        ],
+      },
+    ],
   },
 };

@@ -1,5 +1,5 @@
 import { data } from "@/config/data";
-import D3 from "./components/test.jsx";
+import D3 from "./components/tree.jsx";
 export default function Home() {
   return (
     <main className="flex min-h-screen flex-col items-center justify-between">

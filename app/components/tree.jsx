@@ -27,11 +27,11 @@ export default function D3() {
 const chart = (svgRef) => {
   const root = d3.hierarchy(data);
   const diagonal = d3.linkHorizontal().x(d => d.y).y(d => d.x);
-  const dx = 20;
+  const dx = 50;
   const dy = 150
   const width = 1200
   const height = 1200
-  const margin = ({top: 50, right: 50, bottom:50, left: 50})
+  const margin = ({top: 50, right: 50, bottom:50, left: 200})
   const tree  = d3.tree().nodeSize([dx, dy])
 
   root.x0 = dy / 2;
@@ -39,7 +39,7 @@ const chart = (svgRef) => {
   root.descendants().forEach((d, i) => {
     d.id = i;
     d._children = d.children;
-    if (d.depth && d.data.name.length !== 7) d.children = null;
+    if (d.depth >= 1) d.children = null;
   });
 
   if(!svgRef) return;
@@ -52,11 +52,34 @@ const chart = (svgRef) => {
     .attr("font-family", "sans-serif")
     .attr("font-size", 14);
 
+  const defs =  svg.append("defs")
+
+  const gradient = defs.append("linearGradient")
+    .attr("id", "svgGradient")
+    .attr("x1", "0%")
+    .attr("x2", "100%")
+    .attr("y1", "0%")
+    .attr("y2", "100%");
+
+  gradient.append("stop")
+    .attr("class", "start")
+    .attr("offset", "0%")
+    .attr("stop-color", "red")
+    .attr("stop-opacity", 1);
+
+  gradient.append("stop")
+    .attr("class", "end")
+    .attr("offset", "100%")
+    .attr("stop-color", "blue")
+    .attr("stop-opacity", 1);
+
   const gLink = svg.append("g")
-      .attr("fill", "none")
-      .attr("stroke", "#555")
-      .attr("stroke-opacity", 0.4)
-      .attr("stroke-width", 1.5);
+    .attr("fill", "none")
+    .attr("stroke", "url(#svgGradient)")
+    .attr("stroke-opacity", 1)
+    .attr("stroke-width", 3);
+
+ 
 
   const gNode = svg.append("g")
       .attr("cursor", "pointer")
@@ -98,10 +121,12 @@ const chart = (svgRef) => {
           update(d);
         });
 
-    nodeEnter.append("circle")
-        .attr("r", 2.5)
-        .attr("fill", d => d._children ? "#555" : "#999")
-        .attr("stroke-width", 10);
+    nodeEnter.append("svg:image")
+    .attr('x', 0)
+    .attr('y', -15)
+    .attr('width', 30)
+    .attr('height', 30)
+    .attr("xlink:href", d => d.data.iconPath)
 
     nodeEnter.append("text")
         .attr("dy", "0.31em")
@@ -109,13 +134,13 @@ const chart = (svgRef) => {
         .attr("text-anchor", d => d._children ? "end" : "start")
         .text(d => d.data.name)
       .clone(true).lower()
-        .attr("stroke-linejoin", "round")
-        .attr("stroke-width", 3)
-        .attr("stroke", "white");
+        // .attr("stroke-linejoin", "round")
+        // .attr("stroke-width", 3)
+        // .attr("stroke", "white");
 
     // Transition nodes to their new position.
     const nodeUpdate = node.merge(nodeEnter).transition(transition)
-        .attr("transform", d => `translate(${d.y},${d.x})`)
+        .attr("transform", d => `translate(${d.y - 20},${d.x})`)
         .attr("fill-opacity", 1)
         .attr("stroke-opacity", 1);
 
@@ -129,9 +154,11 @@ const chart = (svgRef) => {
     const link = gLink.selectAll("path")
       .data(links, d => d.target.id);
 
+
     // Enter any new links at the parent's previous position.
     const linkEnter = link.enter().append("path")
         .attr("d", d => {
+          console.log(d)
           const o = {x: source.x0, y: source.y0};
           return diagonal({source: o, target: o});
         });
