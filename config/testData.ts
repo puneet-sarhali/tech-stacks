@@ -5,22 +5,27 @@ export const data = {
     {
       name: "react",
       iconPath: "/react.svg",
+      repo: "facebook/react",
       children: [
         {
           name: "ui",
           iconPath: "/react.svg",
           children: [
-            { name: "vanilla tailwind", iconPath: "/react.svg" },
-            { name: "bootstrap", iconPath: "/react.svg" },
-            { name: "material ui", iconPath: "/react.svg" },
+            {
+              name: "tailwind",
+              iconPath: "/tailwind.svg",
+              repo: "tailwindlabs/tailwindcss",
+            },
+            { name: "bootstrap", iconPath: "/bootstrap.svg" },
+            { name: "material ui", iconPath: "/mui.svg" },
           ],
         },
         {
           name: "state",
           iconPath: "/react.svg",
           children: [
-            { name: "redux", iconPath: "/react.svg" },
-            { name: "mobx", iconPath: "/react.svg" },
+            { name: "redux", iconPath: "/redux.svg" },
+            { name: "mobx", iconPath: "/mobx.svg" },
           ],
         },
       ],
@@ -33,9 +38,9 @@ export const data = {
           name: "ui",
           iconPath: "/react.svg",
           children: [
-            { name: "vanilla tailwind", iconPath: "/react.svg" },
-            { name: "bootstrap", iconPath: "/react.svg" },
-            { name: "material ui", iconPath: "/react.svg" },
+            { name: "tailwind", iconPath: "/tailwind.svg" },
+            { name: "bootstrap", iconPath: "/bootstrap.svg" },
+            { name: "material ui", iconPath: "/mui.svg" },
           ],
         },
         {

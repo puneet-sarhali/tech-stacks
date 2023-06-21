@@ -2,7 +2,7 @@
 import { useEffect, useState, useRef } from "react";
 import * as d3 from "d3";
 import { data } from "../../config/testData"
-import { d3Tree } from "../utils/d3";
+import FetchRepoStars, { getRepoStars } from "./fetchRepoStars";
 
 
 export default function D3() {
@@ -13,11 +13,13 @@ export default function D3() {
 
 
   return (
-    <div className="bg-gray-200">
+    <div className="relative bg-neutral-50 w-screen h-screen">
       <svg
         ref={svgRef}
+        className="z-20"
       ></svg>
     </div>
+
   );
 }
 
@@ -27,8 +29,8 @@ export default function D3() {
 const chart = (svgRef) => {
   const root = d3.hierarchy(data);
   const diagonal = d3.linkHorizontal().x(d => d.y).y(d => d.x);
-  const dx = 50;
-  const dy = 150
+  const dx = 60;
+  const dy = 200;
   const width = 1200
   const height = 1200
   const margin = ({top: 50, right: 50, bottom:50, left: 200})
@@ -45,12 +47,14 @@ const chart = (svgRef) => {
   if(!svgRef) return;
   const svg = d3.select(svgRef.current);
 
+
     svg.attr("viewBox", [-margin.left, -margin.right, width, height])
-    .attr("width", width)
-    .attr("height", height)
+    .attr("width", "100%")
+    .attr("height", "100%")
     .attr("style", "max-width: 100%; height: auto; height: intrinsic;")
     .attr("font-family", "sans-serif")
     .attr("font-size", 14);
+
 
   const defs =  svg.append("defs")
 
@@ -64,20 +68,26 @@ const chart = (svgRef) => {
   gradient.append("stop")
     .attr("class", "start")
     .attr("offset", "0%")
-    .attr("stop-color", "red")
+    .attr("stop-color", "#f8fafc")
+    .attr("stop-opacity", 0.2);
+
+    gradient.append("stop")
+    .attr("class", "middle")
+    .attr("offset", "50%")
+    .attr("stop-color", "yellow")
     .attr("stop-opacity", 1);
 
   gradient.append("stop")
     .attr("class", "end")
     .attr("offset", "100%")
     .attr("stop-color", "blue")
-    .attr("stop-opacity", 1);
+    .attr("stop-opacity", 0.2);
 
   const gLink = svg.append("g")
     .attr("fill", "none")
-    .attr("stroke", "url(#svgGradient)")
+    .attr("stroke", "#404040")
     .attr("stroke-opacity", 1)
-    .attr("stroke-width", 3);
+    .attr("stroke-width", 1.5);
 
  
 
@@ -121,19 +131,49 @@ const chart = (svgRef) => {
           update(d);
         });
 
-    nodeEnter.append("svg:image")
-    .attr('x', 0)
-    .attr('y', -15)
-    .attr('width', 30)
-    .attr('height', 30)
-    .attr("xlink:href", d => d.data.iconPath)
+    nodeEnter.append("rect")
+    .attr("x", -60)
+    .attr("y", -20)
+    .attr("width", 120)
+    .attr("height", 50)
+    .attr("rx", 5)
+    .attr("ry", 5)
+    .attr("fill", "#fafafa")
+    .attr("stroke", d => d._children ? "#e5e5e5" : "#f5f5f5")
+    .attr("stroke-width", 1);
 
     nodeEnter.append("text")
-        .attr("dy", "0.31em")
-        .attr("x", d => d._children ? -6 : 6)
-        .attr("text-anchor", d => d._children ? "end" : "start")
-        .text(d => d.data.name)
-      .clone(true).lower()
+    .attr("dy", "0.31em")
+    .attr("font-size", 12)
+    .attr("fill", "#525252")
+    .attr("x", -15)
+    .attr("text-anchor", "start")
+    .text(d => d.data.name)
+  .clone(true).lower()
+
+  nodeEnter.append("text")
+    .attr("dy", "0.31em")
+    .attr("font-size", 12)
+    .attr("fill", "#525252")
+    .attr("x", -15)
+    .attr("y", 20)
+    .attr("text-anchor", "start")
+    .each(async function (d) {
+      if(d.data.repo){
+        const stars = await getRepoStars(d.data.repo);
+        d3.select(this).text(stars);
+      }
+    })
+  .clone(true).lower()
+
+    nodeEnter.append("svg:image")
+    .attr('x', -50)
+    .attr('y', -15)
+    .attr('width', 22)
+    .attr('height', 22)
+    .attr("xlink:href", d => d.data.iconPath)
+
+
         // .attr("stroke-linejoin", "round")
         // .attr("stroke-width", 3)
         // .attr("stroke", "white");
