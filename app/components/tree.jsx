@@ -97,7 +97,7 @@ const chart = (svgRef) => {
       .attr("pointer-events", "all");
 
   function update(source) {
-    const duration = d3.event && d3.event.altKey ? 2500 : 250;
+    const duration = 250;
     const nodes = root.descendants().reverse();
     const links = root.links();
 
@@ -232,8 +232,8 @@ const chart = (svgRef) => {
         translation = [event.transform.x, event.transform.y],
         tbound = -height * scale,
         bbound = height * scale,
-        lbound = (-width ) * scale,
-        rbound = (width ) * scale;
+        lbound = (-width + margin.left) * scale,
+        rbound = (width - margin.right) * scale;
     translation = [
       Math.max(Math.min(translation[0], rbound), lbound),
       Math.max(Math.min(translation[1], bbound), tbound)
