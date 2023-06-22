@@ -53,7 +53,8 @@ const chart = (svgRef) => {
     .attr("height", "100%")
     .attr("style", "max-width: 100%; height: auto; height: intrinsic;")
     .attr("font-family", "sans-serif")
-    .attr("font-size", 14);
+    .attr("font-size", 14)
+    .attr("class", "drawarea");
 
 
   const defs =  svg.append("defs")
@@ -221,7 +222,30 @@ const chart = (svgRef) => {
     });
   }
 
+  svg.call(d3.zoom()
+      .extent([[0, 0], [width, height]])
+      .scaleExtent([0.5, 8])
+      .on("zoom", zoom));
+
+  function zoom(event) {
+    var scale = event.transform.k,
+        translation = [event.transform.x, event.transform.y],
+        tbound = -height * scale,
+        bbound = height * scale,
+        lbound = (-width ) * scale,
+        rbound = (width ) * scale;
+    translation = [
+      Math.max(Math.min(translation[0], rbound), lbound),
+      Math.max(Math.min(translation[1], bbound), tbound)
+    ];
+    d3.select(".drawarea")
+      .attr("transform", "translate(" + translation + ")" +
+            " scale(" + scale + ")");
+  }
+      
+
   update(root);
 
   return svg.node();
 }
+
