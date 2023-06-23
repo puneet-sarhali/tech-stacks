@@ -1,6 +1,6 @@
 export const data = {
   name: "frontend",
-  iconPath: "/react.svg",
+  iconPath: "/frontend.png",
   children: [
     {
       name: "react",
@@ -8,24 +8,32 @@ export const data = {
       repo: "facebook/react",
       children: [
         {
-          name: "ui",
-          iconPath: "/react.svg",
+          name: "UI",
+          iconPath: "/ui.png",
           children: [
             {
               name: "tailwind",
               iconPath: "/tailwind.svg",
               repo: "tailwindlabs/tailwindcss",
             },
-            { name: "bootstrap", iconPath: "/bootstrap.svg" },
-            { name: "material ui", iconPath: "/mui.svg" },
+            {
+              name: "bootstrap",
+              iconPath: "/bootstrap.svg",
+              repo: "react-bootstrap/react-bootstrap",
+            },
+            {
+              name: "material UI",
+              iconPath: "/mui.svg",
+              repo: "mui-org/material-ui",
+            },
           ],
         },
         {
           name: "state",
-          iconPath: "/react.svg",
+          iconPath: "/state.png",
           children: [
-            { name: "redux", iconPath: "/redux.svg" },
-            { name: "mobx", iconPath: "/mobx.svg" },
+            { name: "redux", iconPath: "/redux.svg", repo: "reduxjs/redux" },
+            { name: "mobx", iconPath: "/mobx.svg", repo: "mobxjs/mobx" },
           ],
         },
       ],
@@ -33,19 +41,20 @@ export const data = {
     {
       name: "vue",
       iconPath: "/vue.svg",
+      repo: "vuejs/vue",
       children: [
         {
-          name: "ui",
-          iconPath: "/react.svg",
+          name: "UI",
+          iconPath: "/ui.png",
           children: [
             { name: "tailwind", iconPath: "/tailwind.svg" },
             { name: "bootstrap", iconPath: "/bootstrap.svg" },
-            { name: "material ui", iconPath: "/mui.svg" },
+            { name: "material UI", iconPath: "/mui.svg" },
           ],
         },
         {
           name: "state",
-          iconPath: "/react.svg",
+          iconPath: "/state.png",
           children: [
             { name: "vuex", iconPath: "/react.svg" },
             { name: "pinia", iconPath: "/react.svg" },
