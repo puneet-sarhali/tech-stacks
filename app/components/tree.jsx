@@ -5,6 +5,7 @@ import { data } from "../../config/testData";
 import { getRepoStars } from "./fetchRepoStars";
 import { formatNumber } from "../utils/formatNumber";
 import { capitalizeWords } from "../utils/capitalizeWord";
+import { Rokkitt } from "next/font/google";
 
 export default function D3() {
   const svgRef = useRef(null);
@@ -13,8 +14,11 @@ export default function D3() {
   }, []);
 
   return (
-    <div className="relative bg-neutral-50 w-screen h-screen">
-      <svg ref={svgRef} className="z-20 border-2"></svg>
+    <div
+      className="relative bg-transparent w-screen h-screen"
+      style={{ backgroundImage: "url('/dotted.svg')" }}
+    >
+      <svg ref={svgRef} className="z-20"></svg>
     </div>
   );
 }
@@ -23,16 +27,18 @@ const chart = async (svgRef) => {
   const root = d3.hierarchy(data);
   await processHierarchy(root);
   console.log(root);
+  root.sort((a, b) => b.stars - a.stars);
+  console.log(root);
   const diagonal = d3
     .linkHorizontal()
     .x((d) => d.y - 10)
     .y((d) => d.x);
 
-  const dx = 60;
-  const dy = 200;
+  const dx = 40;
+  const dy = 300;
   const width = 1500;
   const height = 1200;
-  const margin = { top: 50, right: 50, bottom: 50, left: 50 };
+  const margin = { top: 50, right: 50, bottom: 50, left: 150 };
   const tree = d3.tree().nodeSize([dx, dy]);
 
   root.x0 = dy / 2;
@@ -66,8 +72,6 @@ const chart = async (svgRef) => {
     .on("zoom", () => g.attr("transform", d3.zoomTransform(svg.node())));
 
   svg.call(zoomBehaviours);
-
-  setTimeout(() => zoomBehaviours.translateTo(svg, 0, 0), 100);
 
   const defs = svg.append("defs");
 
@@ -103,7 +107,7 @@ const chart = async (svgRef) => {
   const gLink = g
     .append("g")
     .attr("fill", "none")
-    .attr("stroke", "#404040")
+    .attr("stroke", "#737373")
     .attr("stroke-opacity", 1)
     .attr("stroke-width", 1.5);
 
@@ -153,7 +157,7 @@ const chart = async (svgRef) => {
         update(d);
         if (d3.event && d3.event.altKey) {
           setTimeout(() => {
-            zoomToFit();
+            //zoomToFit();
           }, duration + 100);
           //zoomToFit();
         }
@@ -163,8 +167,10 @@ const chart = async (svgRef) => {
       .append("rect")
       .attr("x", -60)
       .attr("y", -20)
-      .attr("width", 120)
-      .attr("height", (d) => (d.stars !== "" ? 50 : 35))
+      .attr("width", (d) =>
+        d.data.name.length > 10 ? d.data.name.length * 8 + 80 : 160
+      )
+      .attr("height", (d) => (d.stars !== "" ? 35 : 35))
       .attr("rx", 5)
       .attr("ry", 5)
       .attr("fill", "#fafafa")
@@ -177,27 +183,33 @@ const chart = async (svgRef) => {
       .append("text")
       .attr("dy", "0.31em")
       .attr("font-size", 12)
-      .attr("fill", "#525252")
       .attr("x", -20)
       .attr("y", -3)
       .attr("text-anchor", "start")
-      .text((d) => capitalizeWords(d.data.name))
+      .html(
+        (d) =>
+          `${capitalizeWords(d.data.name)} <tspan style="fill: #a3a3a3;">${
+            d.stars ? "&#9733; " + formatNumber(d.stars) : ""
+          }</tspan>`
+      )
       .clone(true)
       .lower()
-      .style("cursor", (d) => (d._children ? "pointer" : "default"));
+      .attr("fill", "#262626")
+      .style("cursor", (d) => (d._children ? "pointer" : "default"))
+      .style("font-weight", "extra-bold");
 
-    nodeEnter
-      .append("text")
-      .attr("dy", "0.31em")
-      .attr("font-size", 10)
-      .attr("fill", "#737373")
-      .attr("x", -20)
-      .attr("y", 15)
-      .attr("text-anchor", "start")
-      .text((d) => formatNumber(d.stars))
-      .clone(true)
-      .lower()
-      .style("cursor", (d) => (d._children ? "pointer" : "default"));
+    // nodeEnter
+    //   .append("text")
+    //   .attr("dy", "0.31em")
+    //   .attr("font-size", 10)
+    //   .attr("fill", "#737373")
+    //   .attr("x", -20)
+    //   .attr("y", 15)
+    //   .attr("text-anchor", "start")
+    //   .text((d) => (d.stars ? "★ " + formatNumber(d.stars) : ""))
+    //   .clone(true)
+    //   .lower()
+    //   .style("cursor", (d) => (d._children ? "pointer" : "default"));
 
     nodeEnter
       .append("svg:image")
@@ -261,34 +273,34 @@ const chart = async (svgRef) => {
     });
   }
 
-  function zoomToFit(paddingPercent) {
-    const bounds = svg.node().getBBox();
-    const parent = svg.node().parentElement;
-    const fullWidth = parent.clientWidth;
-    const fullHeight = parent.clientHeight;
+  // function zoomToFit(paddingPercent) {
+  //   const bounds = svg.node().getBBox();
+  //   const parent = svg.node().parentElement;
+  //   const fullWidth = parent.clientWidth;
+  //   const fullHeight = parent.clientHeight;
 
-    const width = bounds.width;
-    const height = bounds.height;
+  //   const width = bounds.width;
+  //   const height = bounds.height;
 
-    const midX = bounds.x + width / 2;
-    const midY = bounds.y + height / 2;
+  //   const midX = bounds.x + width / 2;
+  //   const midY = bounds.y + height / 2;
 
-    if (width == 0 || height == 0) return; // nothing to fit
+  //   if (width == 0 || height == 0) return; // nothing to fit
 
-    const scale =
-      (paddingPercent || 0.75) /
-      Math.max(width / fullWidth, height / fullHeight);
-    const translate = [
-      fullWidth / 2 - scale * midX,
-      fullHeight / 2 - scale * midY,
-    ];
+  //   const scale =
+  //     (paddingPercent || 0.75) /
+  //     Math.max(width / fullWidth, height / fullHeight);
+  //   const translate = [
+  //     fullWidth / 2 - scale * midX,
+  //     fullHeight / 2 - scale * midY,
+  //   ];
 
-    const transform = d3.zoomIdentity
-      .translate(translate[0], translate[1])
-      .scale(scale);
+  //   const transform = d3.zoomIdentity
+  //     .translate(translate[0], translate[1])
+  //     .scale(scale);
 
-    svg.transition().duration(500).call(zoomBehaviours.transform, transform);
-  }
+  //   svg.transition().duration(500).call(zoomBehaviours.transform, transform);
+  // }
 
   update(root);
 
@@ -296,9 +308,13 @@ const chart = async (svgRef) => {
 };
 
 async function processHierarchy(node) {
+  const fetchPromises = [];
+
   if (node.data.repo) {
-    const stars = await getRepoStars(node.data.repo);
-    node.stars = stars;
+    const promise = getRepoStars(node.data.repo).then((stars) => {
+      node.stars = stars;
+    });
+    fetchPromises.push(promise);
   } else {
     node.stars = "";
   }
@@ -306,7 +322,10 @@ async function processHierarchy(node) {
   // Recursively process child nodes
   if (node.children) {
     for (const child of node.children) {
-      await processHierarchy(child);
+      const promise = processHierarchy(child);
+      fetchPromises.push(promise);
     }
   }
+
+  await Promise.all(fetchPromises);
 }
