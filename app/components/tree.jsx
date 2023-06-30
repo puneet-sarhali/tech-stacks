@@ -5,7 +5,7 @@ import { data } from "../../config/testData";
 import { getRepoStars } from "./fetchRepoStars";
 import { formatNumber } from "../utils/formatNumber";
 import { capitalizeWords } from "../utils/capitalizeWord";
-import { Rokkitt } from "next/font/google";
+import { text } from "d3";
 
 export default function D3() {
   const svgRef = useRef(null);
@@ -15,7 +15,7 @@ export default function D3() {
 
   return (
     <div
-      className="relative bg-transparent w-screen h-screen"
+      className="relative bg-[#191C21] w-screen h-screen"
       style={{ backgroundImage: "url('/dotted.svg')" }}
     >
       <svg ref={svgRef} className="z-20"></svg>
@@ -24,21 +24,25 @@ export default function D3() {
 }
 
 const chart = async (svgRef) => {
-  const root = d3.hierarchy(data);
-  await processHierarchy(root);
-  console.log(root);
-  root.sort((a, b) => b.stars - a.stars);
-  console.log(root);
-  const diagonal = d3
-    .linkHorizontal()
-    .x((d) => d.y - 10)
-    .y((d) => d.x);
-
-  const dx = 40;
-  const dy = 300;
+  const dx = 45;
+  const dy = 250;
   const width = 1500;
   const height = 1200;
   const margin = { top: 50, right: 50, bottom: 50, left: 150 };
+  const bgColor = "#191C21";
+  const borderColor = "#545864";
+  const linkColor = "#545864";
+  const textColor = "#fff";
+  const rect = { width: 160, height: 35, rx: 5, ry: 5 };
+
+  const root = d3.hierarchy(data);
+  await fetchStars(root);
+  root.sort((a, b) => b.stars - a.stars);
+  const diagonal = d3
+    .linkHorizontal()
+    .source((d) => [d.source.y + 80, d.source.x])
+    .target((d) => [d.target.y - 80, d.target.x]);
+
   const tree = d3.tree().nodeSize([dx, dy]);
 
   root.x0 = dy / 2;
@@ -46,7 +50,8 @@ const chart = async (svgRef) => {
   root.descendants().forEach((d, i) => {
     d.id = i;
     d._children = d.children;
-    if (d.depth >= 1) d.children = null;
+    if (d.depth >= 1 && d.data.name !== "frontend") d.children = null;
+    console.log(d);
   });
 
   if (!svgRef) return;
@@ -56,58 +61,41 @@ const chart = async (svgRef) => {
     .attr("viewBox", [-margin.left, -margin.right, width, height])
     .attr("width", "1500")
     .attr("height", "2000")
-    .attr(
-      "style",
-      "max-width: 100%; max-height: 100%; border: 1px solid #e5e5e5;"
-    )
-    .attr("font-family", "sans-serif")
+    .attr("style", "max-width: 100%; max-height: 100%;")
     .attr("font-size", 14)
+    .attr("font-color", textColor)
     .attr("class", "drawarea");
 
   const g = svg.append("g");
 
-  const zoomBehaviours = d3
+  const zoomBehaviors = d3
     .zoom()
     .scaleExtent([0.05, 3])
     .on("zoom", () => g.attr("transform", d3.zoomTransform(svg.node())));
 
-  svg.call(zoomBehaviours);
+  svg.call(zoomBehaviors);
 
-  const defs = svg.append("defs");
+  // Append the filter element to the SVG
+  const filter = svg
+    .append("defs")
+    .append("filter")
+    .attr("id", "drop-shadow")
+    .attr("x", -60)
+    .attr("y", -20)
+    .attr("width", 1.2)
+    .attr("height", 1.2);
 
-  const gradient = defs
-    .append("linearGradient")
-    .attr("id", "svgGradient")
-    .attr("x1", "0%")
-    .attr("x2", "100%")
-    .attr("y1", "0%")
-    .attr("y2", "100%");
-
-  gradient
-    .append("stop")
-    .attr("class", "start")
-    .attr("offset", "0%")
-    .attr("stop-color", "#f8fafc")
-    .attr("stop-opacity", 0.2);
-
-  gradient
-    .append("stop")
-    .attr("class", "middle")
-    .attr("offset", "50%")
-    .attr("stop-color", "yellow")
-    .attr("stop-opacity", 1);
-
-  gradient
-    .append("stop")
-    .attr("class", "end")
-    .attr("offset", "100%")
-    .attr("stop-color", "blue")
-    .attr("stop-opacity", 0.2);
+  filter
+    .append("feDropShadow")
+    .attr("dx", 2)
+    .attr("dy", 4)
+    .attr("stdDeviation", 4)
+    .attr("flood-opacity", 0.5);
 
   const gLink = g
     .append("g")
     .attr("fill", "none")
-    .attr("stroke", "#737373")
+    .attr("stroke", linkColor)
     .attr("stroke-opacity", 1)
     .attr("stroke-width", 1.5);
 
@@ -170,12 +158,12 @@ const chart = async (svgRef) => {
       .attr("width", (d) =>
         d.data.name.length > 10 ? d.data.name.length * 8 + 80 : 160
       )
-      .attr("height", (d) => (d.stars !== "" ? 35 : 35))
+      .attr("height", (d) => (d.stars !== "" ? 40 : 40))
       .attr("rx", 5)
       .attr("ry", 5)
-      .attr("fill", "#fafafa")
-      .attr("stroke", "#d4d4d4")
-      .attr("stroke-width", 1)
+      .attr("fill", bgColor)
+      .attr("stroke", borderColor)
+      .attr("stroke-width", 0.8)
       .attr("stroke-dasharray", (d) => (d._children ? "" : "3,3"))
       .style("cursor", (d) => (d._children ? "pointer" : "default"));
 
@@ -183,46 +171,40 @@ const chart = async (svgRef) => {
       .append("text")
       .attr("dy", "0.31em")
       .attr("font-size", 12)
-      .attr("x", -20)
-      .attr("y", -3)
+      .attr("x", -15)
+      .attr("y", 0)
       .attr("text-anchor", "start")
       .html(
         (d) =>
-          `${capitalizeWords(d.data.name)} <tspan style="fill: #a3a3a3;">${
+          `
+          <tspan style="fill: #f3f4f6; font-size: 12">${capitalizeWords(
+            d.data.name
+          )}</tspan>
+          <tspan dx="0.5em" style="fill: #a3a3a3; font-size: 10; margin-left: 5px;">${
             d.stars ? "&#9733; " + formatNumber(d.stars) : ""
           }</tspan>`
       )
       .clone(true)
       .lower()
-      .attr("fill", "#262626")
+      .attr("fill", textColor)
       .style("cursor", (d) => (d._children ? "pointer" : "default"))
       .style("font-weight", "extra-bold");
 
-    // nodeEnter
-    //   .append("text")
-    //   .attr("dy", "0.31em")
-    //   .attr("font-size", 10)
-    //   .attr("fill", "#737373")
-    //   .attr("x", -20)
-    //   .attr("y", 15)
-    //   .attr("text-anchor", "start")
-    //   .text((d) => (d.stars ? "★ " + formatNumber(d.stars) : ""))
-    //   .clone(true)
-    //   .lower()
-    //   .style("cursor", (d) => (d._children ? "pointer" : "default"));
+    nodeEnter
+      .append("circle")
+      .attr("cx", -39) // Adjust the cx value as needed
+      .attr("cy", 0) // Adjust the cy value as needed
+      .attr("r", 14) // Adjust the radius value as needed
+      .style("fill", "#f3f4f6"); // Adjust the fill color as needed
 
     nodeEnter
       .append("svg:image")
       .attr("x", -50)
-      .attr("y", -15)
+      .attr("y", -11)
       .attr("width", 22)
       .attr("height", 22)
       .attr("xlink:href", (d) => d.data.iconPath)
       .style("cursor", (d) => (d._children ? "pointer" : "default"));
-
-    // .attr("stroke-linejoin", "round")
-    // .attr("stroke-width", 3)
-    // .attr("stroke", "white");
 
     // Transition nodes to their new position.
     const nodeUpdate = node
@@ -243,6 +225,9 @@ const chart = async (svgRef) => {
 
     // Update the links…
     const link = gLink.selectAll("path").data(links, (d) => d.target.id);
+    // .attr("stroke", (d) =>
+    //   d.source.data.name === "react" ? "#6ee7b7" : "#a3a3a3"
+    // );
 
     // Enter any new links at the parent's previous position.
     const linkEnter = link
@@ -272,42 +257,12 @@ const chart = async (svgRef) => {
       d.y0 = d.y;
     });
   }
-
-  // function zoomToFit(paddingPercent) {
-  //   const bounds = svg.node().getBBox();
-  //   const parent = svg.node().parentElement;
-  //   const fullWidth = parent.clientWidth;
-  //   const fullHeight = parent.clientHeight;
-
-  //   const width = bounds.width;
-  //   const height = bounds.height;
-
-  //   const midX = bounds.x + width / 2;
-  //   const midY = bounds.y + height / 2;
-
-  //   if (width == 0 || height == 0) return; // nothing to fit
-
-  //   const scale =
-  //     (paddingPercent || 0.75) /
-  //     Math.max(width / fullWidth, height / fullHeight);
-  //   const translate = [
-  //     fullWidth / 2 - scale * midX,
-  //     fullHeight / 2 - scale * midY,
-  //   ];
-
-  //   const transform = d3.zoomIdentity
-  //     .translate(translate[0], translate[1])
-  //     .scale(scale);
-
-  //   svg.transition().duration(500).call(zoomBehaviours.transform, transform);
-  // }
-
   update(root);
 
   return svg.node();
 };
 
-async function processHierarchy(node) {
+async function fetchStars(node) {
   const fetchPromises = [];
 
   if (node.data.repo) {
@@ -322,7 +277,7 @@ async function processHierarchy(node) {
   // Recursively process child nodes
   if (node.children) {
     for (const child of node.children) {
-      const promise = processHierarchy(child);
+      const promise = fetchStars(child);
       fetchPromises.push(promise);
     }
   }

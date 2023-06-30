@@ -1,6 +1,5 @@
 export async function getRepoStars(repo: string): Promise<number> {
   try {
-    console.log(process.env.GITHUB_ACCESS_TOKEN);
     const response = await fetch(`https://api.github.com/repos/${repo}`, {
       headers: {
         "X-GitHub-Api-Version": "2022-11-28",
@@ -8,7 +7,6 @@ export async function getRepoStars(repo: string): Promise<number> {
       },
     });
     const data = await response.json();
-    console.log(data);
     const { stargazers_count } = data;
     return stargazers_count;
   } catch (error: any) {
