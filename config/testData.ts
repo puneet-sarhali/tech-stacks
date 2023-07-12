@@ -224,6 +224,11 @@ export const data = {
                   iconPath: "/react-move.png",
                   repo: "react-tools/react-move",
                 },
+                {
+                  name: "auto animate",
+                  iconPath: "/auto-animate.png",
+                  repo: "formkit/auto-animate",
+                },
               ],
             },
             {
@@ -317,12 +322,12 @@ export const data = {
                 },
                 {
                   name: "bootstrap vue",
-                  iconPath: "/bootstrapVue.svg",
+                  iconPath: "/bootstrap-vue.png",
                   repo: "bootstrap-vue/bootstrap-vue",
                 },
                 {
                   name: "vuetify",
-                  iconPath: "/vuetify.png",
+                  iconPath: "/vuetify.svg",
                   repo: "vuetifyjs/vuetify",
                 },
                 {
@@ -332,7 +337,7 @@ export const data = {
                 },
                 {
                   name: "element UI",
-                  iconPath: "/element.png",
+                  iconPath: "/element-ui.png",
                   repo: "ElemeFE/element",
                 },
                 {
@@ -342,17 +347,17 @@ export const data = {
                 },
                 {
                   name: "vue material",
-                  iconPath: "/vueMaterial.png",
+                  iconPath: "/vue-material.png",
                   repo: "vuematerial/vue-material",
                 },
                 {
                   name: "ant design vue",
-                  iconPath: "/antdvue.svg",
+                  iconPath: "/ant-design-vue.png",
                   repo: "vueComponent/ant-design-vue",
                 },
                 {
                   name: "prime vue",
-                  iconPath: "/primevue.png",
+                  iconPath: "/prime-vue.png",
                   repo: "primefaces/primevue",
                 },
                 {
@@ -377,12 +382,17 @@ export const data = {
                 {
                   name: "vue kinesis",
                   iconPath: "/vue-kinesis.png",
-                  repo: "alexandrebonaventure/vue-kinesis",
+                  repo: "Aminerman/vue-kinesis",
                 },
                 {
                   name: "vueuse motion",
                   iconPath: "/vueuse.png",
                   repo: "vueuse/motion",
+                },
+                {
+                  name: "auto animate",
+                  iconPath: "/auto-animate.png",
+                  repo: "formkit/auto-animate",
                 },
               ],
             },
@@ -418,6 +428,82 @@ export const data = {
                   iconPath: "/tailwind.svg",
                   repo: "tailwindlabs/tailwindcss",
                 },
+                {
+                  name: "ng bootstrap",
+                  iconPath: "/ng-bootstrap.png",
+                  repo: "ng-bootstrap/ng-bootstrap",
+                },
+                {
+                  name: "clarity",
+                  iconPath: "/clarity.png",
+                  repo: "vmware/clarity",
+                },
+                {
+                  name: "angular material",
+                  iconPath: "/angular-material.svg",
+                  repo: "angular/components",
+                },
+                {
+                  name: "prime ng",
+                  iconPath: "/prime-ng.png",
+                  repo: "primefaces/primeng",
+                },
+                {
+                  name: "ng zorro",
+                  iconPath: "/ng-zorro.png",
+                  repo: "NG-ZORRO/ng-zorro-antd",
+                },
+                {
+                  name: "nebular",
+                  iconPath: "/nebular.png",
+                  repo: "akveo/nebular",
+                },
+                {
+                  name: "ng lightning",
+                  iconPath: "/ng-lightning.png",
+                  repo: "ng-lightning/ng-lightning",
+                },
+                {
+                  name: "onsen UI",
+                  iconPath: "/onsen-ui.png",
+                  repo: "OnsenUI/OnsenUI",
+                },
+                {
+                  name: "taiga UI",
+                  iconPath: "/taiga-ui.png",
+                  repo: "Tinkoff/taiga-ui",
+                },
+              ],
+            },
+            {
+              name: "state",
+              iconPath: "/state.png",
+              children: [
+                {
+                  name: "ngrx",
+                  iconPath: "/ngrx.png",
+                  repo: "ngrx/platform",
+                },
+                {
+                  name: "akita",
+                  iconPath: "/akita.png",
+                  repo: "datorama/akita",
+                },
+                {
+                  name: "ngxs",
+                  iconPath: "/ngxs.png",
+                  repo: "ngxs/store",
+                },
+                {
+                  name: "RxAngular",
+                  iconPath: "/rx-angular.png",
+                  repo: "rx-angular/rx-angular",
+                },
+                {
+                  name: "elf",
+                  iconPath: "/elf.png",
+                  repo: "ngneat/elf",
+                },
               ],
             },
           ],
@@ -426,11 +512,94 @@ export const data = {
           name: "svelte",
           iconPath: "/svelte.svg",
           repo: "sveltejs/svelte",
+          children: [
+            {
+              name: "UI",
+              iconPath: "/ui.png",
+              children: [
+                {
+                  name: "svelte material UI",
+                  iconPath: "/svelte-material-ui.png",
+                  repo: "hperrin/svelte-material-ui",
+                },
+                {
+                  name: "svelte headless UI",
+                  iconPath: "/headlessui.png",
+                  repo: "rgossiaux/svelte-headlessui",
+                },
+                {
+                  name: "Carbon components svelte",
+                  iconPath: "/carbon-components-svelte.png",
+                  repo: "carbon-design-system/carbon-components-svelte",
+                },
+                {
+                  name: "skeleton",
+                  iconPath: "/skeleton.png",
+                  repo: "skeletonlabs/skeleton",
+                },
+              ],
+            },
+            {
+              name: "animnation",
+              iconPath: "/animation.png",
+              children: [
+                {
+                  name: "auto animate",
+                  iconPath: "/auto-animate.png",
+                  repo: "formkit/auto-animate",
+                },
+              ],
+            },
+            {
+              name: "form",
+              iconPath: "/form.png",
+              children: [
+                {
+                  name: "felte",
+                  iconPath: "/felte.png",
+                  repo: "pablo-abc/felte",
+                },
+                {
+                  name: "vest",
+                  iconPath: "/vest.png",
+                  repo: "ealush/vest",
+                },
+              ],
+            },
+          ],
         },
         {
           name: "solid",
           iconPath: "/solid.png",
           repo: "solidjs/solid",
+          children: [
+            {
+              name: "UI",
+              iconPath: "/ui.png",
+              children: [
+                {
+                  name: "zag",
+                  iconPath: "/zag.png",
+                  repo: "chakra-ui/zag",
+                },
+                {
+                  name: "kobalte",
+                  iconPath: "/kobalte.png",
+                  repo: "kobaltedev/kobalte",
+                },
+                {
+                  name: "suid",
+                  iconPath: "/suid.png",
+                  repo: "swordev/suid",
+                },
+                {
+                  name: "solid toast",
+                  iconPath: "/solid-toast.png",
+                  repo: "ardeora/solid-toast",
+                },
+              ],
+            },
+          ],
         },
       ],
     },
@@ -480,223 +649,392 @@ export const data = {
       iconPath: "/backend.png",
       children: [
         {
-          name: "python",
-          iconPath: "/python.svg",
-          repo: "python/cpython",
+          name: "framework",
+          iconPath: "/framework.png",
           children: [
             {
-              name: "django",
-              iconPath: "/django.svg",
-              repo: "django/django",
+              name: "python",
+              iconPath: "/python.svg",
+              repo: "python/cpython",
+              children: [
+                {
+                  name: "django",
+                  iconPath: "/django.svg",
+                  repo: "django/django",
+                },
+                {
+                  name: "flask",
+                  iconPath: "/flask.svg",
+                  repo: "pallets/flask",
+                },
+                {
+                  name: "fastapi",
+                  iconPath: "/fastapi.svg",
+                  repo: "tiangolo/fastapi",
+                },
+                {
+                  name: "starlette",
+                  iconPath: "/starlette.png",
+                  repo: "encode/starlette",
+                },
+                {
+                  name: "tornado",
+                  iconPath: "/tornado.png",
+                  repo: "tornadoweb/tornado",
+                },
+                {
+                  name: "aiohttp",
+                  iconPath: "/aiohttp.png",
+                  repo: "aio-libs/aiohttp",
+                },
+              ],
             },
             {
-              name: "flask",
-              iconPath: "/flask.svg",
-              repo: "pallets/flask",
+              name: "node",
+              iconPath: "/node.svg",
+              repo: "nodejs/node",
+              children: [
+                {
+                  name: "express",
+                  iconPath: "/express.svg",
+                  repo: "expressjs/express",
+                },
+                {
+                  name: "nest",
+                  iconPath: "/nest.svg",
+                  repo: "nestjs/nest",
+                },
+                {
+                  name: "fastify",
+                  iconPath: "/fastify.svg",
+                  repo: "fastify/fastify",
+                },
+                {
+                  name: "koa",
+                  iconPath: "/koa.svg",
+                  repo: "koajs/koa",
+                },
+                {
+                  name: "sails",
+                  iconPath: "/sails.svg",
+                  repo: "balderdashy/sails",
+                },
+                {
+                  name: "hapi",
+                  iconPath: "/hapi.svg",
+                  repo: "hapijs/hapi",
+                },
+                {
+                  name: "adonis",
+                  iconPath: "/adonis.svg",
+                  repo: "adonisjs/adonis-framework",
+                },
+              ],
             },
             {
-              name: "fastapi",
-              iconPath: "/fastapi.svg",
-              repo: "tiangolo/fastapi",
+              name: "rust",
+              iconPath: "/rust.svg",
+              repo: "rust-lang/rust",
+              children: [
+                {
+                  name: "rocket",
+                  iconPath: "/rocket.png",
+                  repo: "SergioBenitez/Rocket",
+                },
+                {
+                  name: "actix web",
+                  iconPath: "/actix.png",
+                  repo: "actix/actix-web",
+                },
+                {
+                  name: "warp",
+                  iconPath: "/warp.png",
+                  repo: "seanmonstar/warp",
+                },
+                {
+                  name: "tide",
+                  iconPath: "/tide.png",
+                  repo: "http-rs/tide",
+                },
+                {
+                  name: "tokio",
+                  iconPath: "/tokio.jpeg",
+                  repo: "tokio-rs/tokio",
+                },
+              ],
             },
             {
-              name: "starlette",
-              iconPath: "/starlette.png",
-              repo: "encode/starlette",
+              name: "java",
+              iconPath: "/java.svg",
+              repo: "openjdk/jdk",
+              children: [
+                {
+                  name: "spring",
+                  iconPath: "/spring.svg",
+                  repo: "spring-projects/spring-framework",
+                },
+                {
+                  name: "micronaut",
+                  iconPath: "/micronaut.png",
+                  repo: "micronaut-projects/micronaut-core",
+                },
+                {
+                  name: "quarkus",
+                  iconPath: "/quarkus.png",
+                  repo: "quarkusio/quarkus",
+                },
+                {
+                  name: "vert.x",
+                  iconPath: "/vertx.png",
+                  repo: "eclipse-vertx/vert.x",
+                },
+                {
+                  name: "javalin",
+                  iconPath: "/javalin.png",
+                  repo: "tipsy/javalin",
+                },
+              ],
             },
             {
-              name: "tornado",
-              iconPath: "/tornado.png",
-              repo: "tornadoweb/tornado",
+              name: "PHP",
+              iconPath: "/php.svg",
+              repo: "php/php-src",
+              children: [
+                {
+                  name: "laravel",
+                  iconPath: "/laravel.svg",
+                  repo: "laravel/laravel",
+                },
+                {
+                  name: "symfony",
+                  iconPath: "/symfony.svg",
+                  repo: "symfony/symfony",
+                },
+                {
+                  name: "slim",
+                  iconPath: "/slim.png",
+                  repo: "slimphp/Slim",
+                },
+                {
+                  name: "yii",
+                  iconPath: "/yii.png",
+                  repo: "yiisoft/yii2",
+                },
+              ],
             },
             {
-              name: "aiohttp",
-              iconPath: "/aiohttp.png",
-              repo: "aio-libs/aiohttp",
+              name: "ruby",
+              iconPath: "/ruby.svg",
+              repo: "ruby/ruby",
+              children: [
+                {
+                  name: "rails",
+                  iconPath: "/rails.svg",
+                  repo: "rails/rails",
+                },
+                {
+                  name: "sinatra",
+                  iconPath: "/sinatra.svg",
+                  repo: "sinatra/sinatra",
+                },
+                {
+                  name: "hanami",
+                  iconPath: "/hanami.png",
+                  repo: "hanami/hanami",
+                },
+              ],
+            },
+            {
+              name: "elixir",
+              iconPath: "/elixir.svg",
+              repo: "elixir-lang/elixir",
+              children: [
+                {
+                  name: "phoenix",
+                  iconPath: "/phoenix.svg",
+                  repo: "phoenixframework/phoenix",
+                },
+                {
+                  name: "plug",
+                  iconPath: "/plug.png",
+                  repo: "elixir-plug/plug",
+                },
+              ],
+            },
+            {
+              name: "dotnet",
+              iconPath: "/dotnet.svg",
+              repo: "dotnet/runtime",
+              children: [
+                {
+                  name: "asp.net",
+                  iconPath: "/dotnet.png",
+                  repo: "dotnet/aspnetcore",
+                },
+              ],
             },
           ],
         },
         {
-          name: "node",
-          iconPath: "/node.svg",
-          repo: "nodejs/node",
+          name: "database",
+          iconPath: "/database.png",
           children: [
             {
-              name: "express",
-              iconPath: "/express.svg",
-              repo: "expressjs/express",
+              name: "mysql",
+              iconPath: "/mysql.svg",
+              repo: "mysql/mysql-server",
             },
             {
-              name: "nest",
-              iconPath: "/nest.svg",
-              repo: "nestjs/nest",
+              name: "postgres",
+              iconPath: "/postgresql.svg",
+              repo: "postgres/postgres",
             },
             {
-              name: "fastify",
-              iconPath: "/fastify.svg",
-              repo: "fastify/fastify",
+              name: "mongodb",
+              iconPath: "/mongodb.svg",
+              repo: "mongodb/mongo",
             },
             {
-              name: "koa",
-              iconPath: "/koa.svg",
-              repo: "koajs/koa",
+              name: "redis",
+              iconPath: "/redis.svg",
+              repo: "redis/redis",
             },
             {
-              name: "sails",
-              iconPath: "/sails.svg",
-              repo: "balderdashy/sails",
+              name: "sqlite",
+              iconPath: "/sqlite.svg",
+              repo: "sqlite/sqlite",
             },
             {
-              name: "hapi",
-              iconPath: "/hapi.svg",
-              repo: "hapijs/hapi",
+              name: "cassandra",
+              iconPath: "/cassandra.svg",
+              repo: "apache/cassandra",
             },
             {
-              name: "adonis",
-              iconPath: "/adonis.svg",
-              repo: "adonisjs/adonis-framework",
+              name: "neo4j",
+              iconPath: "/neo4j.svg",
+              repo: "neo4j/neo4j",
+            },
+            {
+              name: "couchdb",
+              iconPath: "/couchdb.svg",
+              repo: "apache/couchdb",
             },
           ],
         },
         {
-          name: "rust",
-          iconPath: "/rust.svg",
-          repo: "rust-lang/rust",
+          name: "devops",
+          iconPath: "/devops.png",
           children: [
             {
-              name: "rocket",
-              iconPath: "/rocket.png",
-              repo: "SergioBenitez/Rocket",
+              name: "docker",
+              iconPath: "/docker.svg",
+              repo: "docker/compose",
             },
             {
-              name: "actix web",
-              iconPath: "/actix.png",
-              repo: "actix/actix-web",
+              name: "kubernetes",
+              iconPath: "/kubernetes.svg",
+              repo: "kubernetes/kubernetes",
             },
             {
-              name: "warp",
-              iconPath: "/warp.png",
-              repo: "seanmonstar/warp",
+              name: "terraform",
+              iconPath: "/terraform.svg",
+              repo: "hashicorp/terraform",
             },
             {
-              name: "tide",
-              iconPath: "/tide.png",
-              repo: "http-rs/tide",
+              name: "ansible",
+              iconPath: "/ansible.svg",
+              repo: "ansible/ansible",
             },
             {
-              name: "tokio",
-              iconPath: "/tokio.jpeg",
-              repo: "tokio-rs/tokio",
+              name: "helm",
+              iconPath: "/helm.svg",
+              repo: "helm/helm",
+            },
+            {
+              name: "vagrant",
+              iconPath: "/vagrant.svg",
+              repo: "hashicorp/vagrant",
+            },
+            {
+              name: "puppet",
+              iconPath: "/puppet.svg",
+              repo: "puppetlabs/puppet",
+            },
+            {
+              name: "chef",
+              iconPath: "/chef.svg",
+              repo: "chef/chef",
+            },
+            {
+              name: "saltstack",
+              iconPath: "/saltstack.svg",
+              repo: "saltstack/salt",
+            },
+            {
+              name: "jenkins",
+              iconPath: "/jenkins.svg",
+              repo: "jenkinsci/jenkins",
+            },
+            {
+              name: "travis",
+              iconPath: "/travis.svg",
+              repo: "travis-ci/travis-ci",
             },
           ],
         },
         {
-          name: "java",
-          iconPath: "/java.svg",
-          repo: "openjdk/jdk",
+          name: "headless CMS",
+          iconPath: "/headless-cms.png",
           children: [
             {
-              name: "spring",
-              iconPath: "/spring.svg",
-              repo: "spring-projects/spring-framework",
+              name: "strapi",
+              iconPath: "/strapi.svg",
+              repo: "strapi/strapi",
             },
             {
-              name: "micronaut",
-              iconPath: "/micronaut.png",
-              repo: "micronaut-projects/micronaut-core",
+              name: "ghost",
+              iconPath: "/ghost.png",
+              repo: "TryGhost/Ghost",
             },
             {
-              name: "quarkus",
-              iconPath: "/quarkus.png",
-              repo: "quarkusio/quarkus",
+              name: "keystone",
+              iconPath: "/keystone.png",
+              repo: "keystonejs/keystone",
             },
             {
-              name: "vert.x",
-              iconPath: "/vertx.png",
-              repo: "eclipse-vertx/vert.x",
+              name: "directus",
+              iconPath: "/directus.svg",
+              repo: "directus/directus",
             },
             {
-              name: "javalin",
-              iconPath: "/javalin.png",
-              repo: "tipsy/javalin",
-            },
-          ],
-        },
-        {
-          name: "PHP",
-          iconPath: "/php.svg",
-          repo: "php/php-src",
-          children: [
-            {
-              name: "laravel",
-              iconPath: "/laravel.svg",
-              repo: "laravel/laravel",
+              name: "decap",
+              iconPath: "/decap.png",
+              repo: "decaporg/decap-cms",
             },
             {
-              name: "symfony",
-              iconPath: "/symfony.svg",
-              repo: "symfony/symfony",
+              name: "sanity",
+              iconPath: "/sanity.png",
+              repo: "sanity-io/sanity",
             },
             {
-              name: "slim",
-              iconPath: "/slim.png",
-              repo: "slimphp/Slim",
+              name: "wagtail",
+              iconPath: "/wagtail.svg",
+              repo: "wagtail/wagtail",
             },
             {
-              name: "yii",
-              iconPath: "/yii.png",
-              repo: "yiisoft/yii2",
-            },
-          ],
-        },
-        {
-          name: "ruby",
-          iconPath: "/ruby.svg",
-          repo: "ruby/ruby",
-          children: [
-            {
-              name: "rails",
-              iconPath: "/rails.svg",
-              repo: "rails/rails",
+              name: "payload",
+              iconPath: "/payload.webp",
+              repo: "payloadcms/payload",
             },
             {
-              name: "sinatra",
-              iconPath: "/sinatra.svg",
-              repo: "sinatra/sinatra",
+              name: "tina",
+              iconPath: "/tina.png",
+              repo: "tinacms/tinacms",
             },
             {
-              name: "hanami",
-              iconPath: "/hanami.png",
-              repo: "hanami/hanami",
-            },
-          ],
-        },
-        {
-          name: "elixir",
-          iconPath: "/elixir.svg",
-          repo: "elixir-lang/elixir",
-          children: [
-            {
-              name: "phoenix",
-              iconPath: "/phoenix.svg",
-              repo: "phoenixframework/phoenix",
-            },
-            {
-              name: "plug",
-              iconPath: "/plug.png",
-              repo: "elixir-plug/plug",
-            },
-          ],
-        },
-        {
-          name: "dotnet",
-          iconPath: "/dotnet.svg",
-          repo: "dotnet/runtime",
-          children: [
-            {
-              name: "asp.net",
-              iconPath: "/dotnet.png",
-              repo: "dotnet/aspnetcore",
+              name: "webiny",
+              iconPath: "/webiny.png",
+              repo: "webiny/webiny-js",
             },
           ],
         },

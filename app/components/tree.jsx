@@ -156,7 +156,7 @@ const chart = async (svgRef) => {
       .attr("x", -60)
       .attr("y", -20)
       .attr("width", (d) =>
-        d.data.name.length > 10 ? d.data.name.length * 8 + 80 : 160
+        d.data.name.length > 12 ? d.data.name.length * 8 + 80 : 160
       )
       .attr("height", (d) => (d.stars !== "" ? 40 : 40))
       .attr("rx", 5)
