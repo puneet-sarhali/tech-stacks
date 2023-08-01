@@ -1,11 +1,11 @@
 "use client";
-import { useEffect, useState, useRef } from "react";
+import { useEffect, useRef } from "react";
 import * as d3 from "d3";
 import { data } from "../../config/testData";
 import { getRepoStars } from "./fetchRepoStars";
 import { formatNumber } from "../utils/formatNumber";
 import { capitalizeWords } from "../utils/capitalizeWord";
-import { text } from "d3";
+import Link from "next/link";
 
 export default function D3() {
   const svgRef = useRef(null);
@@ -18,6 +18,19 @@ export default function D3() {
       className="relative bg-[#191C21] w-screen h-screen"
       style={{ backgroundImage: "url('/dotted.svg')" }}
     >
+      <div className="absolute top-8 left-8 p-4 bg-zinc-800 rounded-md">
+        <h1 className=" text-neutral-400">
+          Tree visualization of popular open source projects
+        </h1>
+        <Link
+          href={"https://github.com/puneet-sarhali/tech-stacks"}
+          target="_blank"
+          className="text-neutral-300 underline"
+        >
+          Add new projects - Github <span>&#8599;</span>
+        </Link>
+      </div>
+
       <svg ref={svgRef} className="z-20"></svg>
     </div>
   );
