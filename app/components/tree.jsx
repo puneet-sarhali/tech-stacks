@@ -153,7 +153,7 @@ const chart = async (svgRef) => {
       .attr("transform", (d) => `translate(${source.y0},${source.x0})`)
       .attr("fill-opacity", 0)
       .attr("stroke-opacity", 0)
-      .on("click", (event, d) => {
+      .on("click", (d) => {
         d.children = d.children ? null : d._children;
         update(d);
         if (d3.event && d3.event.altKey) {

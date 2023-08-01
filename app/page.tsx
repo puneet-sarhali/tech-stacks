@@ -1,4 +1,3 @@
-import { data } from "@/config/data";
 import D3 from "./components/tree.jsx";
 export default function Home() {
   return (
