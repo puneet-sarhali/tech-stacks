@@ -39,8 +39,8 @@ export default function D3() {
 const chart = async (svgRef) => {
   const dx = 45;
   const dy = 250;
-  const width = 1500;
-  const height = 1200;
+  const width = 1000;
+  const height = 1000;
   const margin = { top: 50, right: 50, bottom: 50, left: 150 };
   const bgColor = "#191C21";
   const borderColor = "#545864";
@@ -72,8 +72,8 @@ const chart = async (svgRef) => {
 
   svg
     .attr("viewBox", [-margin.left, -margin.right, width, height])
-    .attr("width", "1500")
-    .attr("height", "2000")
+    .attr("width", "3200")
+    .attr("height", "3200")
     .attr("style", "max-width: 100%; max-height: 100%;")
     .attr("font-size", 14)
     .attr("font-color", textColor)
@@ -153,7 +153,7 @@ const chart = async (svgRef) => {
       .attr("transform", (d) => `translate(${source.y0},${source.x0})`)
       .attr("fill-opacity", 0)
       .attr("stroke-opacity", 0)
-      .on("click", (d) => {
+      .on("click", (event, d) => {
         d.children = d.children ? null : d._children;
         update(d);
         if (d3.event && d3.event.altKey) {
