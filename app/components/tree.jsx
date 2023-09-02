@@ -1,5 +1,5 @@
 "use client";
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 import * as d3 from "d3";
 import { data } from "../../config/testData";
 import { getRepoStars } from "./fetchRepoStars";
@@ -10,15 +10,17 @@ import Link from "next/link";
 export default function D3() {
   const svgRef = useRef(null);
   useEffect(() => {
-    chart(svgRef);
+    chart(svgRef, setLoading);
   }, []);
+  const [isLoading, setLoading] = useState(true);
+  console.log(isLoading);
 
   return (
     <div
       className="relative bg-[#191C21] w-screen h-screen"
       style={{ backgroundImage: "url('/dotted.svg')" }}
     >
-      <div className="absolute top-8 left-8 p-4 bg-zinc-800 rounded-md">
+      <div className="sm:absolute sm:top-8 sm:left-8 p-4 bg-zinc-800 rounded-md hidden sm:inline-block">
         <h1 className=" text-neutral-400">
           Tree visualization of popular open source projects
         </h1>
@@ -30,13 +32,18 @@ export default function D3() {
           Add new projects - Github <span>&#8599;</span>
         </Link>
       </div>
-
-      <svg ref={svgRef} className="z-20"></svg>
+      {isLoading ? (
+        <div className="absolute top-0 left-0 w-full h-full bg-zinc-800 bg-opacity-50 flex justify-center items-center">
+          <div className="animate-spin rounded-full h-32 w-32 border-t-2 border-b-2 border-neutral-400"></div>
+        </div>
+      ) : (
+        <svg ref={svgRef} className="z-20"></svg>
+      )}
     </div>
   );
 }
 
-const chart = async (svgRef) => {
+const chart = async (svgRef, setLoading) => {
   const dx = 45;
   const dy = 250;
   const width = 1000;
@@ -49,7 +56,7 @@ const chart = async (svgRef) => {
   const rect = { width: 160, height: 35, rx: 5, ry: 5 };
 
   const root = d3.hierarchy(data);
-  await fetchStars(root);
+  await fetchStars(root, setLoading);
   root.sort((a, b) => b.stars - a.stars);
   const diagonal = d3
     .linkHorizontal()
@@ -275,8 +282,10 @@ const chart = async (svgRef) => {
   return svg.node();
 };
 
-async function fetchStars(node) {
+async function fetchStars(node, setLoading) {
   const fetchPromises = [];
+
+  setLoading(true);
 
   if (node.data.repo) {
     const promise = getRepoStars(node.data.repo).then((stars) => {
@@ -290,10 +299,12 @@ async function fetchStars(node) {
   // Recursively process child nodes
   if (node.children) {
     for (const child of node.children) {
-      const promise = fetchStars(child);
+      const promise = fetchStars(child, setLoading);
       fetchPromises.push(promise);
     }
   }
 
-  await Promise.all(fetchPromises);
+  await Promise.all(fetchPromises).then(() => {
+    setLoading(false);
+  });
 }
